@@ -95,7 +95,7 @@ const Login = () => {
     <>
       <Container>
         <FlexCenter>
-          <Heading>Login Forum</Heading>
+          <Heading>Login Forum .</Heading>
         </FlexCenter>
         <Container>
           <FlexDiff>
