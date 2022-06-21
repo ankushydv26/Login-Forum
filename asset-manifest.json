@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ankushydv26/Login-Forum/static/css/main.c2a51d37.css",
-    "main.js": "/ankushydv26/Login-Forum/static/js/main.5120f9c5.js",
-    "static/js/787.0bca8be2.chunk.js": "/ankushydv26/Login-Forum/static/js/787.0bca8be2.chunk.js",
-    "index.html": "/ankushydv26/Login-Forum/index.html",
-    "main.c2a51d37.css.map": "/ankushydv26/Login-Forum/static/css/main.c2a51d37.css.map",
-    "main.5120f9c5.js.map": "/ankushydv26/Login-Forum/static/js/main.5120f9c5.js.map",
-    "787.0bca8be2.chunk.js.map": "/ankushydv26/Login-Forum/static/js/787.0bca8be2.chunk.js.map"
+    "main.css": "/Login-Forum/static/css/main.c2a51d37.css",
+    "main.js": "/Login-Forum/static/js/main.d1c72dad.js",
+    "static/js/787.0bca8be2.chunk.js": "/Login-Forum/static/js/787.0bca8be2.chunk.js",
+    "index.html": "/Login-Forum/index.html",
+    "main.c2a51d37.css.map": "/Login-Forum/static/css/main.c2a51d37.css.map",
+    "main.d1c72dad.js.map": "/Login-Forum/static/js/main.d1c72dad.js.map",
+    "787.0bca8be2.chunk.js.map": "/Login-Forum/static/js/787.0bca8be2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c2a51d37.css",
-    "static/js/main.5120f9c5.js"
+    "static/js/main.d1c72dad.js"
   ]
 }
