@@ -22,13 +22,9 @@ const FlexDiff = styled.div`
   justify-content: space-around;
 `;
 
-const ForumContainer = styled.div`
-  flex: 1;
-`;
+const ForumContainer = styled.div``;
 
-const ProfileContainer = styled.div`
-  margin-left: 9rem;
-`;
+const ProfileContainer = styled.div``;
 
 const ProfilePicContainer = styled.div`
   width: 200px;
@@ -95,6 +91,7 @@ const FlexColumn = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
+  padding-left: 20px;
 `;
 
 const Form = styled.form``;
