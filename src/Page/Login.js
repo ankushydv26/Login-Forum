@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { loadModels, loadFaceRecognition } from "../lib/faceUtil.js";
 import styled, { keyframes } from "styled-components";
+import ProfilePic from "../assets/profilePic.svg";
 
 const Container = styled.div`
   margin: 4px;
@@ -21,12 +22,18 @@ const FlexDiff = styled.div`
   justify-content: space-around;
 `;
 
-const ForumContainer = styled.div``;
+const ForumContainer = styled.div`
+  flex: 1;
+`;
+
+const ProfileContainer = styled.div`
+  margin-left: 9rem;
+`;
 
 const ProfilePicContainer = styled.div`
   width: 200px;
   height: 250px;
-  border: 3px dotted #808080;
+  border: ${(props) => (props.loadProfile ? "none" : "3px dotted #808080")};
   & > img {
     width: 100%;
     height: 250px;
@@ -55,33 +62,84 @@ const ProfileSkin = styled.div`
   border-radius: 4px;
   margin-bottom: 8px;
 `;
-// const  Car
-// const
+
+const InstructionPargarph = styled.p`
+  margin: 5px 0 0 0;
+  color: #aa4a44;
+  font-size: 12px;
+  white-space: nowrap;
+  letter-spacing: 1 !important;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  font-size: 18px;
+  padding: 10px;
+  background: White;
+  border: 0.6px solid #aa4a44;
+  border-radius: 3px;
+  ::placeholder {
+    color: black;
+    font-family: "Pacifico";
+  }
+  &:focus {
+    color: #aa4a44;
+    box-shadow: 0px 0px 2px black;
+    :: placeholder {
+      color: #aa4a44;
+    }
+  }
+`;
+
+const FlexColumn = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+`;
+
+const Form = styled.form``;
 
 const Login = () => {
   const [selectImgFile, setSelectImgFile] = useState();
   const [preview, setPreview] = useState();
-
+  const [loadProfile, setProfilePic] = useState(false);
+  const [getFaceRecognition, setFaceRecognition] = useState(false);
+  const inputFile = useRef(null);
   const handleChange = (e) => {
+    const fileTypeCheck =
+      e.target.files[0].type !== "image/jpeg" &&
+      e.target.files[0].type !== "image/jpg";
+    if (fileTypeCheck) {
+      alert("<h1>Please chose only jpeg</h1>");
+      return;
+    }
     if (e.target.files && e.target.files.length > 0) {
+      setProfilePic(true);
       setSelectImgFile(e.target.files[0]);
-      loadFaceRecognition(URL.createObjectURL(e.target.files[0])).then(
-        (imgInfo) => {
-          console.log(imgInfo);
-        }
-      );
+      loadFaceRecognition(URL.createObjectURL(e.target.files[0]))
+        .then((imgInfo) => {
+          setProfilePic(false);
+          setFaceRecognition(true);
+          console.log("imgInfo", imgInfo.length);
+        })
+        .catch((err) => {
+          alert(err);
+        });
     } else {
       setSelectImgFile(null);
     }
   };
 
-  //   console.log("selectImgFile", selectImgFile);
+  const handleProfileChange = () => {
+    inputFile.current.click();
+  };
+
   useEffect(() => {
     if (!selectImgFile) {
       setPreview(null);
       return;
     }
-    console.log("handleChange#", selectImgFile);
+    // console.log("handleChange#", selectImgFile);
     const objectUrl = URL.createObjectURL(selectImgFile);
     setPreview(objectUrl);
     return () => URL.revokeObjectURL(objectUrl);
@@ -95,22 +153,52 @@ const Login = () => {
     <>
       <Container>
         <FlexCenter>
-          <Heading>Login Forum .</Heading>
+          <Heading>Registration</Heading>
         </FlexCenter>
         <Container>
           <FlexDiff>
             <ForumContainer>
-              <ProfileSkin />
+              <Form>
+                <FlexDiff>
+                  <FlexColumn>
+                    <p style={{ margin: "0" }}>Name</p>
+                    <Input type="text" placeholder="name" />
+                  </FlexColumn>
+                  <FlexColumn>
+                    <p style={{ margin: "0" }}>Email</p>
+                    <Input type="email" placeholder="email" />
+                  </FlexColumn>
+                </FlexDiff>
+              </Form>
             </ForumContainer>
-            <ForumContainer>
-              <input type="file" onChange={handleChange} />
-              {preview && (
-                <ProfilePicContainer>
-                  {" "}
-                  <img alt="profile-pic" src={preview} />{" "}
-                </ProfilePicContainer>
-              )}
-            </ForumContainer>
+            <ProfileContainer>
+              <input
+                type="file"
+                accept="image/png , image/jpeg , image/jpg"
+                ref={inputFile}
+                onChange={handleChange}
+                style={{ display: "none" }}
+              />
+              <ProfilePicContainer
+                loadProfile={loadProfile}
+                onClick={handleProfileChange}
+              >
+                {loadProfile ? (
+                  <ProfileSkin />
+                ) : (
+                  <img
+                    alt="profile-pic"
+                    src={getFaceRecognition ? preview : ProfilePic}
+                    // src={preview}
+                    width="100%"
+                    height="100%"
+                  />
+                )}
+                <InstructionPargarph>
+                  Please upload your single picture
+                </InstructionPargarph>
+              </ProfilePicContainer>
+            </ProfileContainer>
           </FlexDiff>
         </Container>
       </Container>
