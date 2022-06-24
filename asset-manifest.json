@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/register/static/css/main.c2a51d37.css",
-    "main.js": "/register/static/js/main.ddc468e4.js",
-    "static/js/787.16cf1214.chunk.js": "/register/static/js/787.16cf1214.chunk.js",
-    "static/media/profilePic.svg": "/register/static/media/profilePic.e8e289449872a3a3bfe89378165dbbab.svg",
-    "index.html": "/register/index.html",
-    "main.c2a51d37.css.map": "/register/static/css/main.c2a51d37.css.map",
-    "main.ddc468e4.js.map": "/register/static/js/main.ddc468e4.js.map",
-    "787.16cf1214.chunk.js.map": "/register/static/js/787.16cf1214.chunk.js.map"
+    "main.css": "/Login-Forum/static/css/main.c2a51d37.css",
+    "main.js": "/Login-Forum/static/js/main.6194df25.js",
+    "static/js/787.0bca8be2.chunk.js": "/Login-Forum/static/js/787.0bca8be2.chunk.js",
+    "static/media/profilePic.svg": "/Login-Forum/static/media/profilePic.e8e289449872a3a3bfe89378165dbbab.svg",
+    "index.html": "/Login-Forum/index.html",
+    "main.c2a51d37.css.map": "/Login-Forum/static/css/main.c2a51d37.css.map",
+    "main.6194df25.js.map": "/Login-Forum/static/js/main.6194df25.js.map",
+    "787.0bca8be2.chunk.js.map": "/Login-Forum/static/js/787.0bca8be2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c2a51d37.css",
-    "static/js/main.ddc468e4.js"
+    "static/js/main.6194df25.js"
   ]
 }
