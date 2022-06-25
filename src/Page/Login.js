@@ -63,11 +63,12 @@ const ProfileSkin = styled.div`
 
 const InstructionPargarph = styled.p`
   margin: 5px 0 0 0;
-  color: #aa4a44;
+  color: ${(props) => (props.imageError === "Success" ? "green" : "#aa4a44")};
   font-size: 12px;
   white-space: nowrap;
   letter-spacing: 1 !important;
   font-weight: bold;
+  text-align: center;
 `;
 
 const Input = styled.input`
@@ -114,6 +115,10 @@ const FlexColumn = styled.div`
 
 const Form = styled.form``;
 
+const SubText = styled.p`
+  margin: 5px 0 0 0;
+`;
+
 const Login = () => {
   const [selectImgFile, setSelectImgFile] = useState();
   const {
@@ -125,6 +130,9 @@ const Login = () => {
   const [preview, setPreview] = useState();
   const [loadProfile, setProfilePic] = useState(false);
   const [getFaceRecognition, setFaceRecognition] = useState(false);
+  const [imageError, setImageError] = useState(
+    "Please provide a single picture of your"
+  );
   const inputFile = useRef(null);
   const handleChange = (e) => {
     const fileTypeCheck =
@@ -142,6 +150,14 @@ const Login = () => {
           setProfilePic(false);
           setFaceRecognition(true);
           console.log("imgInfo", imgInfo.length);
+          if (imgInfo.length > 0) {
+            setImageError("Success");
+            if (imgInfo.length > 1) {
+              setImageError("More than one face is detected");
+            }
+          } else {
+            setImageError("Face is not detected");
+          }
         })
         .catch((err) => {
           alert(err);
@@ -176,7 +192,13 @@ const Login = () => {
     <>
       <Container>
         <FlexCenter>
-          <Heading>Registration</Heading>
+          <Row style={{ textAlign: "center" }}>
+            <Heading>Registration</Heading>
+            <SubText>
+              it's is simple form which has face detaction of single face
+              profile{" "}
+            </SubText>
+          </Row>
         </FlexCenter>
         <BoxContainer className="mt-5 pt-5">
           <FlexDiff>
@@ -243,13 +265,12 @@ const Login = () => {
                   <img
                     alt="profile-pic"
                     src={getFaceRecognition ? preview : ProfilePic}
-                    // src={preview}
                     width="100%"
                     height="100%"
                   />
                 )}
-                <InstructionPargarph>
-                  Please upload your single picture
+                <InstructionPargarph imageError={imageError}>
+                  {imageError}
                 </InstructionPargarph>
               </ProfilePicContainer>
             </ProfileContainer>
