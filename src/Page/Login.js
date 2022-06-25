@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
 import { loadModels, loadFaceRecognition } from "../lib/faceUtil.js";
 import styled, { keyframes } from "styled-components";
 import ProfilePic from "../assets/profilePic.svg";
+import { Container, Button, Row, Col } from "react-bootstrap";
 
-const Container = styled.div`
+const BoxContainer = styled(Container)`
   margin: 4px;
 `;
 
@@ -87,6 +89,22 @@ const Input = styled.input`
   }
 `;
 
+const CutomButton = styled.button`
+  background-color: #aa4a44;
+  width: 100%;
+  border-radius: 3px;
+  border: none;
+  padding: 10px 12px;
+  color: white;
+  &:hover {
+    background-color: white;
+    color: #aa4a44;
+    border: 1px solid #aa4a44;
+    font-size: 16px;
+    font-weight: bold;
+  }
+`;
+
 const FlexColumn = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -98,6 +116,12 @@ const Form = styled.form``;
 
 const Login = () => {
   const [selectImgFile, setSelectImgFile] = useState();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const [preview, setPreview] = useState();
   const [loadProfile, setProfilePic] = useState(false);
   const [getFaceRecognition, setFaceRecognition] = useState(false);
@@ -131,6 +155,12 @@ const Login = () => {
     inputFile.current.click();
   };
 
+  const handleChanges = (e) => {
+    console.log(e.target.value);
+  };
+
+  const onSubmit = (data) => console.log(data);
+
   useEffect(() => {
     if (!selectImgFile) {
       setPreview(null);
@@ -152,20 +182,51 @@ const Login = () => {
         <FlexCenter>
           <Heading>Registration</Heading>
         </FlexCenter>
-        <Container>
+        <BoxContainer className="mt-5 pt-5">
           <FlexDiff>
             <ForumContainer>
-              <Form>
-                <FlexDiff>
-                  <FlexColumn>
-                    <p style={{ margin: "0" }}>Name</p>
-                    <Input type="text" placeholder="name" />
-                  </FlexColumn>
-                  <FlexColumn>
+              <Form onSubmit={handleSubmit(onSubmit)}>
+                <Row>
+                  <Col>
+                    <p style={{ margin: "0" }}>First Name</p>
+                    <Input
+                      type="text"
+                      placeholder="First Name"
+                      {...register("firstName")}
+                    />
+                  </Col>
+                  <Col>
+                    <p style={{ margin: "0" }}>Last name</p>
+                    <Input
+                      type="text"
+                      placeholder="Last name"
+                      {...register("lastName")}
+                    />
+                  </Col>
+                </Row>
+                <Row className="mt-2">
+                  <Col>
                     <p style={{ margin: "0" }}>Email</p>
-                    <Input type="email" placeholder="email" />
-                  </FlexColumn>
-                </FlexDiff>
+                    <Input
+                      type="email"
+                      placeholder="Email"
+                      {...register("Email")}
+                    />
+                  </Col>
+                  <Col>
+                    <p style={{ margin: "0" }}>City</p>
+                    <Input
+                      type="text"
+                      placeholder="City"
+                      {...register("City")}
+                    />
+                  </Col>
+                </Row>
+                <Row className="mt-5">
+                  <Col md="6">
+                    <CutomButton type="submit">Submit</CutomButton>
+                  </Col>
+                </Row>
               </Form>
             </ForumContainer>
             <ProfileContainer>
@@ -197,7 +258,7 @@ const Login = () => {
               </ProfilePicContainer>
             </ProfileContainer>
           </FlexDiff>
-        </Container>
+        </BoxContainer>
       </Container>
     </>
   );
