@@ -155,10 +155,6 @@ const Login = () => {
     inputFile.current.click();
   };
 
-  const handleChanges = (e) => {
-    console.log(e.target.value);
-  };
-
   const onSubmit = (data) => console.log(data);
 
   useEffect(() => {
